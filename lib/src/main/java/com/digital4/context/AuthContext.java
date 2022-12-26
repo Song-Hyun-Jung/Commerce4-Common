@@ -17,10 +17,11 @@ public class AuthContext {
 
 	
 	public Auth isValidToken(long token) throws Exception{
-		String url = "8080/rest/auth/tokenValid";
+		String targetUrl = "APIG";
+		String requestUrl = "/rest/auth/tokenValid";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("token", token);
-		String response = HttpConnectionUtils.postRequest(url, map);
+		String response = HttpConnectionUtils.postRequest(targetUrl, requestUrl, map);
 		System.out.println("postRequest:" + response);
 		ObjectMapper objectMapper = new ObjectMapper();
 		Auth auth = objectMapper.readValue(response, Auth.class);
@@ -28,10 +29,11 @@ public class AuthContext {
 	}
 	
 	public Auth updateValidTime(long token) throws Exception{
-		String url = "8080/rest/auth/updateToken";
+		String targetUrl = "APIG";
+		String requestUrl = "/rest/auth/updateToken";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("token", token);
-		String response = HttpConnectionUtils.postRequest(url, map);
+		String response = HttpConnectionUtils.postRequest(targetUrl, requestUrl, map);
 		System.out.println("postRequest:" + response);
 		ObjectMapper objectMapper = new ObjectMapper();
 		Auth auth = objectMapper.readValue(response, Auth.class);
@@ -39,10 +41,11 @@ public class AuthContext {
 	}
 	
 	public Auth getAuthPersonId(long token) throws Exception{
-		String url = "8080/rest/auth/personInfo";
+		String targetUrl = "APIG";
+		String requestUrl = "/rest/auth/personInfo";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("token", token);
-		String response = HttpConnectionUtils.postRequest(url, map);
+		String response = HttpConnectionUtils.postRequest(targetUrl, requestUrl, map);
 		System.out.println("postRequest:" + response);
 		ObjectMapper objectMapper = new ObjectMapper();
 		Auth auth = objectMapper.readValue(response, Auth.class);
@@ -50,10 +53,11 @@ public class AuthContext {
 	}
 
 	public Auth generateToken(long personId) throws Exception {
-		String url = "8080/rest/auth/generateToken";
+		String targetUrl = "APIG";
+		String requestUrl = "/rest/auth/generateToken";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("personId", personId);
-		String response = HttpConnectionUtils.postRequest(url, map);
+		String response = HttpConnectionUtils.postRequest(targetUrl, requestUrl, map);
 		System.out.println("postRequest:" + response);
 		ObjectMapper objectMapper = new ObjectMapper();
 		Auth auth = objectMapper.readValue(response, Auth.class);

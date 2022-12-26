@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
@@ -15,20 +16,39 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class HttpConnectionUtils {
 	
+	public static Map<String, String> urls = new HashMap<>();
+	
+	static {
+		/*
+		urls.put("APIG", "http://192.168.1.113:8080");
+		urls.put("Auth", "http://192.168.1.113:8081");
+		urls.put("Person", "http://192.168.1.113:8082");
+		urls.put("Product", "http://192.168.1.113:8083");
+		urls.put("Inventory", "http://192.168.1.113:8084");
+		urls.put("Order", "http://192.168.1.113:8085");
+		*/
+		urls.put("APIG", "http://commerce.hj.apig:8080");
+		urls.put("Auth", "http://commerce.hj.auth:8080");
+		urls.put("Person", "http://commerce.hj.person:8080");
+		urls.put("Product", "http://commerce.hj.product:8080");
+		urls.put("Inventory", "http://commerce.hj.inventory:8080");
+		urls.put("Order", "http://commerce.hj.order:8080");
+	}
+	
 	/** HttpURLConnection GET 방식 */
-	public static String getRequest(String targetUrl) throws Exception{
+	public static String getRequest(String targetUrl, String requestUrl) throws Exception{
 		
 		String response = "";
 		
 		try {
-			String newUrl = "http://192.168.137.10:" + targetUrl;
+			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET"); // 전송 방식
 			conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-			conn.setConnectTimeout(5000); // 연결 타임아웃 설정(5초) 
-			conn.setReadTimeout(5000); // 읽기 타임아웃 설정(5초)
+			conn.setConnectTimeout(10000); // 연결 타임아웃 설정(5초) 
+			conn.setReadTimeout(10000); // 읽기 타임아웃 설정(5초)
 			conn.setDoOutput(true);
 			
 	       // System.out.println("getContentType():" + conn.getContentType()); // 응답 콘텐츠 유형 구하기
@@ -69,21 +89,20 @@ public class HttpConnectionUtils {
 	
 	/** HttpURLConnection GET 방식 */
 	//header 있음
-	public static String getRequest(String targetUrl, String authHeader) throws Exception{
+	public static String getRequest(String targetUrl, String requestUrl, String authHeader) throws Exception{
 		
 		String response = "";
 		
 		try {
-			
-			String newUrl = "http://192.168.137.10:" + targetUrl;
+			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET"); // 전송 방식
 			conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 			conn.addRequestProperty("Authorization", authHeader);
-			conn.setConnectTimeout(5000); // 연결 타임아웃 설정(5초) 
-			conn.setReadTimeout(5000); // 읽기 타임아웃 설정(5초)
+			conn.setConnectTimeout(10000); // 연결 타임아웃 설정(5초) 
+			conn.setReadTimeout(10000); // 읽기 타임아웃 설정(5초)
 			conn.setDoOutput(true);
 			
 	       // System.out.println("getContentType():" + conn.getContentType()); // 응답 콘텐츠 유형 구하기
@@ -123,19 +142,19 @@ public class HttpConnectionUtils {
 	
 	/** HttpURLConnection POST 방식 */
 	//header 없음-Map
-	public static String postRequest(String targetUrl, Map<String, Object> requestMap) throws Exception {
+	public static String postRequest(String targetUrl, String requestUrl, Map<String, Object> requestMap) throws Exception {
 
 		String response = "";
 
 		try {
-			String newUrl = "http://192.168.137.10:" + targetUrl;
+			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST"); // 전송 방식
 			conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-			conn.setConnectTimeout(5000); // 연결 타임아웃 설정(5초) 
-			conn.setReadTimeout(5000); // 읽기 타임아웃 설정(5초)
+			conn.setConnectTimeout(10000); // 연결 타임아웃 설정(5초) 
+			conn.setReadTimeout(10000); // 읽기 타임아웃 설정(5초)
 			conn.setDoOutput(true);	// URL 연결을 출력용으로 사용(true)
 			
 			String requestBody = getJsonStringFromMap(requestMap);
@@ -184,20 +203,20 @@ public class HttpConnectionUtils {
 	
 	/** HttpURLConnection POST 방식 */
 	//header 있음-Map
-	public static String postRequest(String targetUrl, Map<String, Object> requestMap, String authHeader) throws Exception{
+	public static String postRequest(String targetUrl, String requestUrl, Map<String, Object> requestMap, String authHeader) throws Exception{
 
 		String response = "";
 
 		try {
-			String newUrl = "http://192.168.137.10:" + targetUrl;
+			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST"); // 전송 방식
 			conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 			conn.addRequestProperty("Authorization", authHeader);
-			conn.setConnectTimeout(5000); // 연결 타임아웃 설정(5초) //sync~establish
-			conn.setReadTimeout(5000); // 읽기 타임아웃 설정(5초) //establish 이후
+			conn.setConnectTimeout(10000); // 연결 타임아웃 설정(5초) //sync~establish
+			conn.setReadTimeout(10000); // 읽기 타임아웃 설정(5초) //establish 이후
 			conn.setDoOutput(true);	// URL 연결을 출력용으로 사용(true)
 			
 			String requestBody = getJsonStringFromMap(requestMap);
@@ -251,20 +270,19 @@ public class HttpConnectionUtils {
 	
 	/** HttpURLConnection POST 방식 */
 	//header 없음-Object
-	public static String postRequest(String targetUrl, Object object) throws Exception{
+	public static String postRequest(String targetUrl, String requestUrl, Object object) throws Exception{
 
 		String response = "";
 
 		try {
-
-			String newUrl = "http://192.168.137.10:" + targetUrl;
+			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST"); // 전송 방식
 			conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-			conn.setConnectTimeout(5000); // 연결 타임아웃 설정(5초) 
-			conn.setReadTimeout(5000); // 읽기 타임아웃 설정(5초)
+			conn.setConnectTimeout(10000); // 연결 타임아웃 설정(5초) 
+			conn.setReadTimeout(10000); // 읽기 타임아웃 설정(5초)
 			conn.setDoOutput(true);	// URL 연결을 출력용으로 사용(true)
 			
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -312,20 +330,20 @@ public class HttpConnectionUtils {
 	
 	/** HttpURLConnection POST 방식 */
 	//header 있음-Object
-	public static String postRequest(String targetUrl, Object object, String authHeader) throws Exception{
+	public static String postRequest(String targetUrl, String requestUrl, Object object, String authHeader) throws Exception{
 
 		String response = "";
 
 		try {
-			String newUrl = "http://192.168.137.10:" + targetUrl;
+			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST"); // 전송 방식
 			conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 			conn.addRequestProperty("Authorization", authHeader);
-			conn.setConnectTimeout(5000); // 연결 타임아웃 설정(5초) //sync~establish
-			conn.setReadTimeout(5000); // 읽기 타임아웃 설정(5초) //establish 이후
+			conn.setConnectTimeout(10000); // 연결 타임아웃 설정(5초) //sync~establish
+			conn.setReadTimeout(10000); // 읽기 타임아웃 설정(5초) //establish 이후
 			conn.setDoOutput(true);	// URL 연결을 출력용으로 사용(true)
 			
 			ObjectMapper objectMapper = new ObjectMapper();
