@@ -43,6 +43,7 @@ public class HttpConnectionUtils {
 		try {
 			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
+			System.out.println(newUrl);
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET"); // 전송 방식
@@ -96,6 +97,7 @@ public class HttpConnectionUtils {
 		try {
 			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
+			System.out.println(newUrl);
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET"); // 전송 방식
@@ -149,6 +151,7 @@ public class HttpConnectionUtils {
 		try {
 			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
+			System.out.println(newUrl);
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST"); // 전송 방식
@@ -210,6 +213,7 @@ public class HttpConnectionUtils {
 		try {
 			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
+			System.out.println(newUrl);
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST"); // 전송 방식
@@ -277,6 +281,7 @@ public class HttpConnectionUtils {
 		try {
 			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
+			System.out.println(newUrl);
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST"); // 전송 방식
@@ -337,6 +342,7 @@ public class HttpConnectionUtils {
 		try {
 			String newUrl = urls.get(targetUrl) + requestUrl;
 			//String newUrl = "http://192.168.1.113:" + targetUrl;
+			System.out.println(newUrl);
 			URL url = new URL(newUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST"); // 전송 방식
