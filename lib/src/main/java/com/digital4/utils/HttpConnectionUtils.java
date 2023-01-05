@@ -27,12 +27,12 @@ public class HttpConnectionUtils {
 		urls.put("Inventory", "http://192.168.1.113:8084");
 		urls.put("Order", "http://192.168.1.113:8085");
 		*/
-		urls.put("APIG", "http://commerce.hj.apig:8080");
-		urls.put("Auth", "http://commerce.hj.auth:8080");
-		urls.put("Person", "http://commerce.hj.person:8080");
-		urls.put("Product", "http://commerce.hj.product:8080");
-		urls.put("Inventory", "http://commerce.hj.inventory:8080");
-		urls.put("Order", "http://commerce.hj.order:8080");
+		urls.put("APIG", "http://commerce-hj-apig");
+		urls.put("Auth", "http://commerce-hj-auth");
+		urls.put("Person", "http://commerce-hj-person");
+		urls.put("Product", "http://commerce-hj-product");
+		urls.put("Inventory", "http://commerce-hj-inventory");
+		urls.put("Order", "http://commerce-hj-order");
 	}
 	
 	/** HttpURLConnection GET 방식 */
